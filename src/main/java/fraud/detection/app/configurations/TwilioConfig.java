@@ -1,31 +1,31 @@
 package fraud.detection.app.configurations;
-
-
-import com.twilio.Twilio;
-import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConfigurationProperties
 public class TwilioConfig {
-    @Value("${twilio.account-sid}")
     private String twilioAccountSid;
-
-    @Value("${twilio.auth-token}")
+private String trial_number;
     private String twilioAuthToken;
-    @PostConstruct
-    public void init() {
-        Twilio.init(
-                getTwilioAccountSid(),
-                getTwilioAuthToken()
-        );
+    public TwilioConfig(){
+
     }
+
     public String getTwilioAccountSid() {
         return twilioAccountSid;
     }
 
     public void setTwilioAccountSid(String twilioAccountSid) {
         this.twilioAccountSid = twilioAccountSid;
+    }
+
+    public String getTrial_number() {
+        return trial_number;
+    }
+
+    public void setTrial_number(String trial_number) {
+        this.trial_number = trial_number;
     }
 
     public String getTwilioAuthToken() {

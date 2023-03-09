@@ -1,5 +1,6 @@
 package fraud.detection.app.services;
 
+import fraud.detection.app.dto.SmsRequest;
 import fraud.detection.app.models.User;
 import fraud.detection.app.repositories.UserRepository;
 import fraud.detection.app.dto.RegisterDTO;
@@ -16,10 +17,10 @@ import java.util.Random;
 @RequiredArgsConstructor
 
 public class RegistrationService {
-    private final TwilioService twilioService;
     private  final UserRepository userRepository;
 private final PasswordEncoder passwordEncoder;
-    public UniversalResponse register(RegisterDTO  request) {
+private final TwilioSmsSender twilioSmsSender;
+    public UniversalResponse register(RegisterDTO  request)  throws Exception{
         Random random= new Random();
         String otp = String.valueOf(random.nextInt(1000));
         String phone=request.getMobileNumber();
@@ -42,22 +43,22 @@ private final PasswordEncoder passwordEncoder;
                         .parmanentAddress(request.getParmanentAddress())
                         .pinCode(request.getPinCode()).
                         password(passwordEncoder.encode(otp)).build();
-                twilioService.sendSms(user, otp);
-
-
+                 SmsRequest smsRequest = new SmsRequest(request.getMobileNumber(), otp) ;
+             //System.out.println(smsRequest);
+                twilioSmsSender.SendSms(smsRequest);
                 userRepository.save(user);
 
 
             UniversalResponse response= UniversalResponse.builder()
-                    .status(String.valueOf(0))
                     .message("Registration Successful")
+                    .status(200).data(user.toString()
+                            )
                     .build();
             return  response;
 
         }
         else {
             UniversalResponse response= UniversalResponse.builder()
-                    .status(String.valueOf(0))
                     .message("User Already Exists,Please Login")
                     .build();
             return  response;
