@@ -43,7 +43,7 @@ public class SecurityConfigaration {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests().requestMatchers
-                        ("/fraud/app/register","/api/auth/login").permitAll()
+                        ("/fraud/app/register","/fraud/app/login").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers
                         ("/api/auth//getusers").hasAuthority("Admin")

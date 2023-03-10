@@ -24,7 +24,7 @@ public class RegisterDTO {
     private String occupation;
     @NotEmpty(message = "This field 'parmanentAddress' should not be empty")
     //    Contact Information
-    private String parmanentAddress;
+    private String permanentAddress;
     @NotEmpty(message = "This field 'currentAddress' should not be empty")
     private String currentAddress;
     @NotEmpty(message = "This field 'mobileNumber' should not be empty")

@@ -3,10 +3,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.Collection;
 @Entity
@@ -38,7 +36,7 @@ public class User implements UserDetails {
     private String occupation;
     @NotNull(message = "This field 'model' should not be empty")
 //    Contact Information
-    private String parmanentAddress;
+    private String permanentAddress;
     @NotNull(message = "This field 'model' should not be empty")
     private String currentAddress;
     @NotNull(message = "This field 'model' should not be empty")

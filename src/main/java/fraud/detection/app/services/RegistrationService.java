@@ -20,7 +20,7 @@ public class RegistrationService {
     private  final UserRepository userRepository;
 private final PasswordEncoder passwordEncoder;
 private final TwilioSmsSender twilioSmsSender;
-    public UniversalResponse register(RegisterDTO  request)  throws Exception{
+    public UniversalResponse register(RegisterDTO  request) {
         Random random= new Random();
         String otp = String.valueOf(random.nextInt(1000));
         String phone=request.getMobileNumber();
@@ -40,12 +40,13 @@ private final TwilioSmsSender twilioSmsSender;
                         .state(request.getState()).
                         middleName(request.getMiddleName())
                         .occupation(request.getOccupation())
-                        .parmanentAddress(request.getParmanentAddress())
+                        .permanentAddress(request.getPermanentAddress())
                         .pinCode(request.getPinCode()).
                         password(passwordEncoder.encode(otp)).build();
                  SmsRequest smsRequest = new SmsRequest(request.getMobileNumber(), otp) ;
              //System.out.println(smsRequest);
                 twilioSmsSender.SendSms(smsRequest);
+//TODO: Save method to be a bolean,if fails to save send error
                 userRepository.save(user);
 
 

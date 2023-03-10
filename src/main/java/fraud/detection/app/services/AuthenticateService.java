@@ -2,7 +2,6 @@ package fraud.detection.app.services;
 
 import fraud.detection.app.Utils.JwtTokenUtil;
 import fraud.detection.app.dto.AuthDTO;
-import fraud.detection.app.dto.RegisterDTO;
 import fraud.detection.app.repositories.UserRepository;
 import fraud.detection.app.responses.UniversalResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +13,11 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class AuthenticatService {
+public class AuthenticateService {
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     public UniversalResponse login(AuthDTO request){
-        System.out.println("Hereee");
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getMobileNumber(), request.getPassword()
         ));

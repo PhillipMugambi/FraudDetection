@@ -10,5 +10,6 @@ import java.io.Serializable;
 public class UniversalResponse implements Serializable {
     private int status;
     private String message;
+    //TODO: implement how to display data to the client
     private String data;
 }
