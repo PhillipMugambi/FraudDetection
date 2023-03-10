@@ -53,9 +53,9 @@ return Keys.hmacShaKeyFor(keyBytes);
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-    public String createToken(User user) {
+    public String createToken(String mobileNumber) {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder().setClaims(claims).setSubject(user.getMobileNumber()).
+        return Jwts.builder().setClaims(claims).setSubject(mobileNumber).
                 setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1800000)) //30 minutes
                 .setIssuedAt(new Date())

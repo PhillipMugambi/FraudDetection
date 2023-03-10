@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +27,8 @@ public class RegistrationController {
         try{
             return ResponseEntity.ok(registrationService.register(request));
         }catch (Exception ex){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
+            return new ResponseEntity(HttpStatus.BAD_REQUEST)
+        ;}
 
 
     }
